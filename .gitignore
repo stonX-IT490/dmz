@@ -1,5 +1,5 @@
-keys.json
-*news.json
 composer*
-/vendor
-kese.inc
+vendor/
+news/
+keys.json
+rmq-news.service

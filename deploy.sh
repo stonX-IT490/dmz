@@ -10,7 +10,7 @@ sudo apt full-upgrade -y
 sudo apt autoremove -y --purge
 
 # Install required packages
-sudo apt install -y ufw php-amqp php-bcmath php-cli php-common php-curl php-fpm php-json php-mbstring php-mysql php-readline php-opcache php-readline php-zip wget unzip inotify-tools
+sudo apt install -y ufw wget unzip php-bcmath php-amqp php-curl php-json php-cli php-zip php-mbstring inotify-tools
 
 # Setup firewall
 sudo ufw --force enable
@@ -27,3 +27,34 @@ sudo wget -O composer-setup.php https://getcomposer.org/installer
 sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 composer require php-amqplib/php-amqplib
 composer update
+
+# Setup rabbitmq listener
+mkdir news
+cd rabbit
+git clone https://github.com/stonX-IT490/rabbitmq-common.git rabbitmq-dmzHost
+git clone https://github.com/stonX-IT490/rabbitmq-common.git rabbitmq-webDmzHost
+cp ../config.dmzHost.php rabbitmq-dmzHost/config.php
+cp ../config.webDmzHost.php rabbitmq-webDmzHost/config.php
+cd ..
+
+pwd=`pwd`'/rabbit'
+serviceNewsHost="[Unit]
+Description=News RabbitMQ Consumer Listener
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/php -f $pwd/newsListener.php
+[Install]
+WantedBy=multi-user.target"
+
+echo "$serviceNewsHost" > rmq-news.service
+
+sudo cp rmq-news.service /etc/systemd/system/
+sudo systemctl start rmq-news
+sudo systemctl enable rmq-news
+
+crontab="*/2 9-16 * * 1-5 /usr/bin/php -f $pwd/stockData.php > $pwd/stockData.log 2>&1
+30 9 * * 1-5 /usr/bin/php -f $pwd/news.php > $pwd/news.log 2>&1"
+
+crontab -r
+crontab "$crontab"
