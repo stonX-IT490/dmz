@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 $outfile = date("Y-m-d")."_news.json";
-$keys = json_decode(file_get_contents("keys.json"));
+$keys = json_decode(file_get_contents(__DIR__."/keys.json"));
 
 function getKey($index)
 {
@@ -71,13 +71,6 @@ function generateAllDailyNews($stocks)
 	
 	return $c;
 	
-}
-
-function getTodaysNews($stock)
-{
-	$allnewstoday = json_decode(file_get_contents($outfile));
-	
-	return $allnewstoday[$stock];
 }
 
 ?>
