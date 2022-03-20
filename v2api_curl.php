@@ -127,7 +127,7 @@ $queryString = http_build_query([
 ]);
 
 //takes the complete http adress from the link+queryString, and starts curl session with the results. saves session as ch
-$ch = curl_init(sprintf('%s?%s', 'https://finnhub.io/api/v1/quote?', $queryString));
+$ch = curl_init(sprintf('%s?%s', 'https://finnhub.io/api/v1/quote', $queryString));
 
 //set options for curl transfer
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
