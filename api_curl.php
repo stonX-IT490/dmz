@@ -1,5 +1,5 @@
 $queryString = http_build_query([
-    'api_token' => 'ISPtzsyQxX9QtBmj54SFI8zhFRRuIwXlFyIvZyGR',
+    'api_token' => 'token',
     'symbols' => 'AAPL,MSFT, AMZN',
     'filter_entities' => 'true',
     'limit' => 50,
