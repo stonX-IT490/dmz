@@ -56,5 +56,8 @@ sudo systemctl enable rmq-news
 crontab="*/2 9-16 * * 1-5 /usr/bin/php -f $pwd/stockData.php > $pwd/stockData.log 2>&1
 30 9 * * 1-5 /usr/bin/php -f $pwd/news.php > $pwd/news.log 2>&1"
 
+echo "$crontab" > crontab.temp
+
 crontab -r
-crontab "$crontab"
+crontab crontab.temp
+rm crontab.temp
