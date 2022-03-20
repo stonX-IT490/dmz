@@ -3,7 +3,7 @@
 include(kese.inc);
 
 //insert array here as $givenArray. For now is hard coded, but will be made to set the requested symbols as the given aray
-$givenArray = array[
+$givenArray = array(
   "AAPL",
   "ABBV",
   "ABT",
@@ -106,7 +106,7 @@ $givenArray = array[
   "WFC",
   "WMT",
   "XOM"
-];
+);
 
 $tokenValue = $tokenApi; //token for api
 
