@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-$outfile = date("Y-m-d")."_news.json";
+$outfile = __DIR__."/".date("Y-m-d")."_news.json";
 $keys = json_decode(file_get_contents(__DIR__."/keys.json"));
 
 function getKey($index)
@@ -68,8 +68,6 @@ function generateAllDailyNews($stocks)
 	}
 	
 	file_put_contents($outfile, "}", FILE_APPEND);
-	
-	return $c;
 	
 }
 
