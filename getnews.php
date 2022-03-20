@@ -73,4 +73,11 @@ function generateAllDailyNews($stocks)
 	
 }
 
+function getTodaysNews($stock)
+{
+	$allnewstoday = json_decode(file_get_contents($outfile));
+	
+	return $allnewstoday[$stock];
+}
+
 ?>
