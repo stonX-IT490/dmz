@@ -1,6 +1,6 @@
 <?php
 
-include(kese.inc);
+include(__DIR__."/kese.inc");
 
 //insert array here as $givenArray. For now is hard coded, but will be made to set the requested symbols as the given aray
 $givenArray = array(
@@ -108,7 +108,7 @@ $givenArray = array(
   "XOM"
 );
 
-$tokenValue = $tokenApi; //token for api
+$tokenValue = getToken(); //token for api
 
 $seconds = 1; //seconds between each loop is done. avoids 30/sec and 60/min request limit from api
 
