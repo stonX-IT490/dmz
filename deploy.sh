@@ -22,12 +22,6 @@ sudo ufw default allow outgoing
 sudo apt install -y apt-transport-https ca-certificates curl gnupg lsb-release
 curl -s https://install.zerotier.com | sudo bash
 
-# Install Composer
-sudo wget -O composer-setup.php https://getcomposer.org/installer
-sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
-composer require php-amqplib/php-amqplib
-composer update
-
 # Setup rabbitmq listener
 mkdir news
 cd rabbit
@@ -61,3 +55,10 @@ echo "$crontab" > crontab.temp
 crontab -r
 crontab crontab.temp
 rm crontab.temp
+
+# Setup Central Logging
+git clone https://github.com/stonX-IT490/logging.git ~/logging
+cd ~/logging
+chmod +x deploy.sh
+./deploy.sh
+cd ~/
