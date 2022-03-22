@@ -62,3 +62,10 @@ cd ~/logging
 chmod +x deploy.sh
 ./deploy.sh
 cd ~/
+
+# Email Push
+git clone https://github.com/stonX-IT490/pushNotification.git ~/pushNotification
+cd ~/pushNotification
+chmod +x deploy.sh
+./deploy.sh
+cd ~/
