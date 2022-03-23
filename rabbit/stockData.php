@@ -26,10 +26,11 @@ foreach($response as $symbol) {
   ]);
   curl_setopt($ch, CURLOPT_URL, sprintf('%s?%s', 'https://finnhub.io/api/v1/quote', $queryString));
   $apiResult = json_decode(curl_exec($ch), true);
+  echo($apiResult['t'].'...');
   $stockData[] = [
     'symbol' => $symbol,
     'value' => $apiResult['c'],
-    'created' => date("Y-m-d H:m:s", $apiResult['t'])
+    'created' => $apiResult['t']
   ];
   echo "Done.\n";
   sleep(1);
