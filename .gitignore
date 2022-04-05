@@ -1,5 +1,7 @@
 composer*
 vendor/
 news/
+rabbit/rabbitmq-dmzHost/
+rabbit/rabbitmq-webDmzHost/
 keys.json
 rmq-news.service

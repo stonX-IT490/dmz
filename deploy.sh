@@ -25,8 +25,8 @@ curl -s https://install.zerotier.com | sudo bash
 # Setup rabbitmq listener
 mkdir news
 cd rabbit
-git clone https://github.com/stonX-IT490/rabbitmq-common.git rabbitmq-dmzHost
-git clone https://github.com/stonX-IT490/rabbitmq-common.git rabbitmq-webDmzHost
+git clone git@github.com:stonX-IT490/rabbitmq-common.git rabbitmq-dmzHost
+git clone git@github.com:stonX-IT490/rabbitmq-common.git rabbitmq-webDmzHost
 cp ../config.dmzHost.php rabbitmq-dmzHost/config.php
 cp ../config.webDmzHost.php rabbitmq-webDmzHost/config.php
 cd ..
@@ -57,14 +57,14 @@ crontab crontab.temp
 rm crontab.temp
 
 # Setup Central Logging
-git clone https://github.com/stonX-IT490/logging.git ~/logging
+git clone git@github.com:stonX-IT490/logging.git ~/logging
 cd ~/logging
 chmod +x deploy.sh
 ./deploy.sh
 cd ~/
 
 # Email Push
-git clone https://github.com/stonX-IT490/pushNotification.git ~/pushNotification
+git clone git@github.com:stonX-IT490/pushNotification.git ~/pushNotification
 cd ~/pushNotification
 chmod +x deploy.sh
 ./deploy.sh
