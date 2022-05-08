@@ -1,7 +1,9 @@
 #!/usr/bin/php 
  
 <?php 
- 
+
+require_once __DIR__."/rabbitmq-dmzHost/rabbitMQLib.php";
+
 function getForexData() 
 { 
 	
@@ -63,5 +65,8 @@ function getForexData()
  
 } 
 
-?>
+$client = new rabbitMQProducer('amq.direct', 'dmz');
+$client->publish([ 'type' => 'insertForex', 'data' => getForexData()]);
+die();
 
+?>
