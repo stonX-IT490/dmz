@@ -38,7 +38,13 @@ foreach($response as $symbol) {
 
 curl_close($ch);
 
-$client->publish([ 'type' => 'insertStocks', 'data' => $stockData ]);
+$response = $client->send_request([ 'type' => 'insertStocks', 'data' => $stockData ]);
+if(!$response) {
+  die("Error comm. with RMQ!\n");
+} else if (isset($response['error']) && $response['error']) {
+  die($response['msg']."\n");
+}
+
 die();
 
 ?>

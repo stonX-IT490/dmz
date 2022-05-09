@@ -21,8 +21,9 @@ function getForexData($currencies) {
         "rate" => $rate
       ]);
     }
-  } 
+  }
 
+  curl_close($ch);
   return $forexArr; 
 } 
 
@@ -42,6 +43,7 @@ if(!$response) {
 } else if (isset($response['error']) && $response['error'])  {
   die($response['msg']."\n");
 }
+die();
 
 ?>
 

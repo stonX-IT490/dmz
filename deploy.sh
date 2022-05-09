@@ -26,7 +26,13 @@ curl -s https://install.zerotier.com | sudo bash
 mkdir news
 cd rabbit
 git clone git@github.com:stonX-IT490/rabbitmq-common.git rabbitmq-dmzHost
+cd rabbitmq-dmzHost
+./deploy.sh
+cd ..
 git clone git@github.com:stonX-IT490/rabbitmq-common.git rabbitmq-webDmzHost
+cd rabbitmq-webDmzHost
+./deploy.sh
+cd ..
 cp ../config.dmzHost.php rabbitmq-dmzHost/config.php
 cp ../config.webDmzHost.php rabbitmq-webDmzHost/config.php
 cd ..
