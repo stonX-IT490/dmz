@@ -138,6 +138,7 @@ fi
 # Setup Central Logging
 git clone git@github.com:stonX-IT490/logging.git ~/logging
 cd ~/logging
+git pull
 chmod +x deploy.sh
 ./deploy.sh
 cd ~/
