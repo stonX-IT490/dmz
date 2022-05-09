@@ -1,5 +1,19 @@
 #!/bin/bash
 
+read -p "Which cluster? (prod, qa, dev) " cluster
+
+rabbit_ip="10.4.90.102"
+
+if [ $cluster == "qa" ]; then
+  rabbit_ip="10.4.90.152"
+fi
+
+if [ $cluster == "prod" ]; then
+  rabbit_ip="broker"
+  echo "10.4.90.52 broker" | sudo tee -a /etc/hosts
+  echo "10.4.90.62 broker" | sudo tee -a /etc/hosts
+fi
+
 # Update repos
 sudo apt update
 
@@ -33,8 +47,34 @@ git clone git@github.com:stonX-IT490/rabbitmq-common.git rabbitmq-webDmzHost
 cd rabbitmq-webDmzHost
 ./deploy.sh
 cd ..
-cp ../config.dmzHost.php rabbitmq-dmzHost/config.php
-cp ../config.webDmzHost.php rabbitmq-webDmzHost/config.php
+
+rabbitDmzHost="<?php
+
+\$config = [
+  'host' => '$rabbit_ip',
+  'port' => 5672,
+  'username' => 'dmz',
+  'password' => 'stonx_dmz',
+  'vhost' => 'dmzHost'
+];
+
+?>"
+
+rabbitWebDmzHost="<?php
+
+\$config = [
+  'host' =>'$rabbit_ip',
+  'port' => 5672,
+  'username' => 'dmz',
+  'password' => 'stonx_dmz',
+  'vhost' => 'webDmzHost'
+];
+
+?>"
+
+echo "$rabbitDmzHost" > rabbitmq-dmzHost/config.php
+echo "$rabbitWebDmzHost" > rabbitmq-webDmzHost/config.php
+
 cd ..
 
 pwd=`pwd`'/rabbit'
