@@ -48,7 +48,8 @@ sudo systemctl start rmq-news
 sudo systemctl enable rmq-news
 
 crontab="*/2 9-16 * * 1-5 /usr/bin/php -f $pwd/stockData.php > $pwd/stockData.log 2>&1
-30 9 * * 1-5 /usr/bin/php -f $pwd/news.php > $pwd/news.log 2>&1"
+30 9 * * 1-5 /usr/bin/php -f $pwd/news.php > $pwd/news.log 2>&1
+30 9 * * 1-5 /usr/bin/php -f $pwd/forexAPI.php > $pwd/forex.log 2>&1"
 
 echo "$crontab" > crontab.temp
 
