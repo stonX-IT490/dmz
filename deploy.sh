@@ -109,6 +109,32 @@ crontab -r
 crontab crontab.temp
 rm crontab.temp
 
+
+# Install check-prod1 in systemd
+pwd=`pwd`
+
+serviceCheckProd1="[Unit]
+Description=Check if dmz-prod1 is up
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=$pwd/check.sh
+
+[Install]
+WantedBy=multi-user.target"
+
+if [ $cluster == "prod" ]; then
+  read -p "Which host? (prod1, prod2) " vm_type
+  if [ $vm_type == "prod2" ]; then
+    echo "$serviceCheckProd1" > check-prod1.service
+    sudo cp check-prod1.service /etc/systemd/system/
+    sudo systemctl start check-prod1
+    sudo systemctl enable check-prod1
+  fi
+fi
+
+
 # Setup Central Logging
 git clone git@github.com:stonX-IT490/logging.git ~/logging
 cd ~/logging
